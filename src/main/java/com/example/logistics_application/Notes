@@ -1,0 +1,10 @@
+STEP - 1
+
+Authentication with default values then move to authentication with db
+for db
+we have to create model,principle,service,repo
+then we have to define login and register method in our controller
+Filters
+* Security filter chain
+*DAO authentication provider
+*Authentication manager
