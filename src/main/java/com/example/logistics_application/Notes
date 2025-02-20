@@ -8,3 +8,13 @@ Filters
 * Security filter chain
 *DAO authentication provider
 *Authentication manager
+
+// work flow
+Users - diff types of users i used rbac in which customer,admin,driver,
+a customer -> multiple orders
+one order -> one shipment
+one driver -> many shipments
+many  shipment -> one driver
+one vechicle-> many shipments
+one shipments->many tracking
+
