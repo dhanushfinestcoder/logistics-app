@@ -2,6 +2,7 @@ package com.example.logistics_application.Model;
 
 
 import com.example.logistics_application.ENUM.ShipmentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,17 +23,21 @@ public class Shipment
     private Long shipmentId;
     @ManyToOne
     @JoinColumn(name = "driver_id",nullable = false)
-    private Users driver;
+    @JsonBackReference("driver-shipments")
+    private Driver driver;
     @ManyToOne
     @JoinColumn(name = "vechicle_id",nullable = false)
+    @JsonBackReference("vechicle-shipments")
     private  Vechicles vechicles;
+    @Column(name = "otp")
+    private String otp;
     @OneToOne
     @JoinColumn(name = "order_id",nullable = false)
+    @JsonBackReference("order-shipment")
     private Orders orders;
     @Enumerated(EnumType.STRING)
     private ShipmentStatus status;
-    @OneToMany(mappedBy = "shipment",cascade = CascadeType.ALL)
-    private List<Tracking> trackingList;
+
 
 
 

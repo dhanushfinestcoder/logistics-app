@@ -1,6 +1,5 @@
 package com.example.logistics_application.ENUM;
 
-public enum VechicleStatus
-{
-    AVAILABLE,IN_USE
+public enum VechicleStatus {
+    AVAILABLE, IN_USE, UNDER_MAINTENANCE
 }
