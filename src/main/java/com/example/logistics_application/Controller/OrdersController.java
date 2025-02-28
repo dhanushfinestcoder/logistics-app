@@ -6,14 +6,15 @@ import com.example.logistics_application.Repository.UserRepo;
 import com.example.logistics_application.Service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequestMapping("/orders")
 public class OrdersController
 {
     @Autowired
@@ -40,8 +41,35 @@ public class OrdersController
         return ResponseEntity.ok(savedOrder);
     }
     @GetMapping("/getOrders")
-    public List<Orders> getOrders()
+    public ResponseEntity<List<Orders>> getOrders()
     {
-        return ordersService.getOrders();
+        List<Orders>orders=ordersService.getOrders();
+        return ResponseEntity.ok(orders);
+    }
+
+    @GetMapping("/getThierOrders")
+    public List<Orders> getThierOrders(@RequestParam String name)
+    {
+        Users users=userRepo.findByName(name);
+        if(users==null)
+        {
+            throw new RuntimeException("Users not found");
+        }
+        Long id=users.getUid();
+        System.out.println(id);
+        return  ordersService.getThierOrders(id);
+    }
+
+    @GetMapping("/getId/{name}")
+    public Long getId(@PathVariable String name)
+    {
+        Users u=userRepo.findByName(name);
+        return u.getUid();
+    }
+
+    @GetMapping("/getById/{id}")
+    public Optional<Orders> getOrder(@PathVariable Long id)
+    {
+        return ordersService.getById(id);
     }
 }

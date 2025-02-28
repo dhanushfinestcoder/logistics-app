@@ -11,6 +11,6 @@ import java.util.List;
 public interface VechicleRepo extends JpaRepository<Vechicles,Long>
 {
     @Query("SELECT v FROM Vechicles v WHERE v.vechicleType = :type AND v.vechicleStatus = 'AVAILABLE'")
-    List<Vechicles> findByVechicleTypeAndStatus(@Param("type") String type, @Param("status") VechicleStatus status);
+    List<Vechicles> findByVechiclesTypeAndStatus(@Param("type") String type, @Param("status") VechicleStatus status);
 
 }

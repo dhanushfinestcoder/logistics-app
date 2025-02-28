@@ -15,7 +15,7 @@ import lombok.*;
 public class Orders
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
    // @Column(name = "order_id")
   private Long orderId;
     //@Column(name = "order_picLoc")
@@ -41,21 +41,21 @@ public class Orders
     //one order -> one shipment
     @OneToOne(mappedBy = "orders",cascade = CascadeType.ALL)
     //@Column(name = "order_ship")
-    @JsonManagedReference("order-shipment")
+    @JsonIgnore
     private Shipment shipment;
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "orderId=" + orderId +
-                ", pickupLoc='" + pickupLoc + '\'' +
-                ", deliveryLoc='" + deliveryLoc + '\'' +
-                ", weight=" + weight +
-                ", status=" + status +
-                ",recieverEmail="+recieverEmail+
-                ", customerId=" + (customer != null ? customer.getUid() : "null") + // Prevents recursion
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Orders{" +
+//                "orderId=" + orderId +
+//                ", pickupLoc='" + pickupLoc + '\'' +
+//                ", deliveryLoc='" + deliveryLoc + '\'' +
+//                ", weight=" + weight +
+//                ", status=" + status +
+//                ",recieverEmail="+recieverEmail+
+//                ", customerId=" + (customer != null ? customer.getUid() : "null") + // Prevents recursion
+//                '}';
+//    }
 
     public Long getOrderId() {
         return orderId;

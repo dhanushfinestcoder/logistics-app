@@ -19,10 +19,11 @@ import java.util.List;
 @Table(name = "vechicles")
 public class Vechicles
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vechicleId;
 
+    @Id
+    @SequenceGenerator(name = "vid",initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "vid")
+    private Long vechicleId;
 
     private String vechicleType;
 
@@ -36,7 +37,11 @@ public class Vechicles
     private List<Shipment> shipmentList;
 
     @OneToOne
-    @JoinColumn(name = "driver_id")
+    @JoinColumn(name = "driver_id",unique = true)
     @JsonBackReference("driver-vechicle")
     private Driver driver;
+
+    public double getVechicleCap() {
+        return vechicleCap;
+    }
 }

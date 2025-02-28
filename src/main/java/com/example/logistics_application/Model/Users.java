@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Table(name="Users")
-//@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,9 +19,9 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uid")
 public class Users
 {
+    @SequenceGenerator(name = "uidGen",allocationSize = 1,initialValue = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "uidGen")
     private Long uid;
     @Column(nullable = false)
     private String name;
@@ -35,9 +34,14 @@ public class Users
     private Role role;
 
     //one to many for customer
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-   // @JsonManagedReference(value = "user-orders")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //@JsonManagedReference(value = "user-orders")
+    @JsonIgnore
     private List<Orders> ordersList;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Driver driver;
 
     //one to many for
 

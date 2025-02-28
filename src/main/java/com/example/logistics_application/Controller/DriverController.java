@@ -4,13 +4,11 @@ import com.example.logistics_application.ENUM.DriverStatus;
 import com.example.logistics_application.ENUM.OrderStatus;
 import com.example.logistics_application.ENUM.ShipmentStatus;
 import com.example.logistics_application.ENUM.VechicleStatus;
-import com.example.logistics_application.Model.Driver;
-import com.example.logistics_application.Model.Orders;
-import com.example.logistics_application.Model.Shipment;
-import com.example.logistics_application.Model.Vechicles;
+import com.example.logistics_application.Model.*;
 import com.example.logistics_application.Repository.OrdersRepo;
 import com.example.logistics_application.Repository.ShipmentRepo;
 import com.example.logistics_application.Service.DriverService;
+import com.example.logistics_application.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +16,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/driver")
 public class DriverController
 {
     @Autowired
     private DriverService driverService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Autowired
@@ -30,16 +33,23 @@ public class DriverController
 
     @Autowired
     private ShipmentRepo shipmentRepo;
+
+    @GetMapping("/allDrivers")
+    public List<Users> getAllDrivers()
+    {
+        return userService.getAllDrivers();
+    }
     @RequestMapping("/drivers")
     public List<Driver> getDriver()
     {
       return driverService.getDrivers(DriverStatus.AVAILABLE);
     }
 
-    @PostMapping("/addDriver")
-    public Driver addDriver(@RequestBody Driver driver)
-    {
-        return driverService.addDriver(driver);
+
+    @GetMapping("/availableDrivers")
+    public ResponseEntity<List<Driver>> getAvailableDrivers() {
+        List<Driver> availableDrivers = driverService.findAvaiableDrivers(DriverStatus.AVAILABLE);
+        return ResponseEntity.ok(availableDrivers);
     }
 
     @PutMapping("/verify-otp/{shipmentId}")

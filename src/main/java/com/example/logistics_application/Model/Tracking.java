@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class Tracking
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long trackingId;
 
     @ManyToOne
