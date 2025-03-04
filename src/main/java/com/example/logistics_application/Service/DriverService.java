@@ -82,4 +82,8 @@ public class DriverService {
     public List<Driver> findAvaiableDrivers(DriverStatus driverStatus) {
         return  driverRepo.findByStatus(driverStatus);
     }
+
+    public List<Driver> getAllDrivers() {
+        return driverRepo.findAll();
+    }
 }

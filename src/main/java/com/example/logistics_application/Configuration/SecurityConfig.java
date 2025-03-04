@@ -41,7 +41,7 @@ public class SecurityConfig
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/user/register","/user/login","/user/users").permitAll()
-                        .requestMatchers( "/admin/**","/driver/**","/orders/**","/admin/addDV").hasAnyAuthority("ROLE_ADMIN","ROLE_CUSTOMER")
+                        .requestMatchers( "/ship/**","/admin/**","/driver/**","/orders/**","/admin/addDV").hasAnyAuthority("ROLE_DRIVER","ROLE_ADMIN","ROLE_CUSTOMER")
                         .requestMatchers("/admin/**","/orders/**","/driver/**","/ship/**","/vec/**","/user/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/admin/addDV").hasAuthority("ROLE_DRIVER")
                         .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()

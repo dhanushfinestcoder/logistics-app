@@ -35,9 +35,9 @@ public class DriverController
     private ShipmentRepo shipmentRepo;
 
     @GetMapping("/allDrivers")
-    public List<Users> getAllDrivers()
+    public List<Driver> getAllDrivers()
     {
-        return userService.getAllDrivers();
+        return driverService.getAllDrivers();
     }
     @RequestMapping("/drivers")
     public List<Driver> getDriver()
@@ -55,9 +55,6 @@ public class DriverController
     @PutMapping("/verify-otp/{shipmentId}")
     public ResponseEntity<String> verifyOtpAndDeliver(@PathVariable Long shipmentId, @RequestParam String otp) {
         Optional<Shipment> optionalShipment = shipmentRepo.findById(shipmentId);
-
-
-
         if (optionalShipment.isEmpty()) {
             return ResponseEntity.badRequest().body("Shipment not found!");
         }
@@ -83,6 +80,29 @@ public class DriverController
 
 
         return ResponseEntity.ok("Order successfully delivered!");
+    }
+
+
+    @PutMapping("/mark-in-transit/{shipmentId}")
+    public ResponseEntity<String> markInTransit(@PathVariable Long shipmentId) {
+        Optional<Shipment> optionalShipment = shipmentRepo.findById(shipmentId);
+
+        if (optionalShipment.isEmpty()) {
+            return ResponseEntity.badRequest().body("Shipment not found!");
+        }
+
+        Shipment shipment = optionalShipment.get();  // Extract the Shipment object
+
+        if (shipment.getStatus() != ShipmentStatus.DISPATCHED) {
+            return ResponseEntity.badRequest().body("Shipment is not dispatched yet!");
+        }
+
+        shipment.setStatus(ShipmentStatus.IN_TRANSIT);
+
+        // shipment.setInTransitAt(LocalDateTime.now());
+        shipmentRepo.save(shipment);
+
+        return ResponseEntity.ok("Shipment is now in transit.");
     }
 
 }

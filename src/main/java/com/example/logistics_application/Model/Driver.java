@@ -3,11 +3,14 @@ package com.example.logistics_application.Model;
 import com.example.logistics_application.ENUM.DriverStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -25,16 +28,18 @@ public class Driver
     @Enumerated(EnumType.STRING)
     private DriverStatus status = DriverStatus.AVAILABLE; // Available by default
 
-    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
-    @JsonBackReference("driver-shipments")
-    private Shipment shipment;
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
+    @JsonManagedReference("driver-shipments")
+    private List<Shipment> shipment;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "vechicle_id")
+    @JsonManagedReference("driver-vechicle")
     private Vechicles vechicles;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference("user-driver")
     private Users user;
 
 //    public Driver(Users savedUser, Vechicles vechicles, DriverStatus driverStatus) {

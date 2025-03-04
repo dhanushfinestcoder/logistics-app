@@ -20,22 +20,32 @@ import java.util.List;
 public class Shipment
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipmentId;
-    @OneToOne
-    @JoinColumn(name = "driver_id",nullable = false,unique = true)
-    @JsonManagedReference("driver-shipments")
-    private Driver driver;
+
+
     @ManyToOne
+    @JoinColumn(name = "driver_id",nullable = false)
+    @JsonBackReference("driver-shipments")
+    private Driver driver;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vechicle_id",nullable = false)
-    @JsonManagedReference("vechicle-shipments")
+    @JsonBackReference("vechicle-shipment")
     private  Vechicles vechicles;
+
+
     @Column(name = "otp")
     private String otp;
+
+
     @OneToOne
     @JoinColumn(name = "order_id",nullable = false)
     @JsonManagedReference("order-shipment")
     private Orders orders;
+
+
     @Enumerated(EnumType.STRING)
     private ShipmentStatus status;
 

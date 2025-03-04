@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -84,6 +85,7 @@ public class AdminController
     @Transactional
     @PostMapping("/addDV")
     public ResponseEntity<String> addDriverVehicle(@RequestBody Users user) {
+        System.out.println(user);
         if (user == null || user.getDriver() == null) {
             return ResponseEntity.badRequest().body("Invalid request. Driver details are missing.");
         }
@@ -120,26 +122,12 @@ public class AdminController
         return ResponseEntity.ok("Driver and vehicle added successfully!");
     }
 
-    @PutMapping("/mark-in-transit/{shipmentId}")
-    public ResponseEntity<String> markInTransit(@PathVariable Long shipmentId) {
-        Optional<Shipment> optionalShipment = shipmentRepo.findById(shipmentId);
 
-        if (optionalShipment.isEmpty()) {
-            return ResponseEntity.badRequest().body("Shipment not found!");
-        }
 
-        Shipment shipment = optionalShipment.get();  // Extract the Shipment object
-
-        if (shipment.getStatus() != ShipmentStatus.DISPATCHED) {
-            return ResponseEntity.badRequest().body("Shipment is not dispatched yet!");
-        }
-
-        shipment.setStatus(ShipmentStatus.IN_TRANSIT);
-
-       // shipment.setInTransitAt(LocalDateTime.now());
-        shipmentRepo.save(shipment);
-
-        return ResponseEntity.ok("Shipment is now in transit.");
+        @GetMapping("/analytics")
+    public ResponseEntity<Map<String,Long>> getOrderAnalytics()
+    {
+        return ResponseEntity.ok(adminService.getOrderanlytics());
     }
 
 }

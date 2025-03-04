@@ -1,10 +1,7 @@
 package com.example.logistics_application.Model;
 
 import com.example.logistics_application.ENUM.Role;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,7 +37,7 @@ public class Users
     private List<Orders> ordersList;
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference("user-driver")
     private Driver driver;
 
     //one to many for

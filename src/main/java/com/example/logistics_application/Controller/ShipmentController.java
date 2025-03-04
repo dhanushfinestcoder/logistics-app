@@ -25,4 +25,15 @@ public class ShipmentController {
     {
         return shipmentService.getShipments();
     }
+
+    @GetMapping("/otp")
+    public List<Shipment> getShip(){
+        return shipmentService.getInships();
+    }
+
+    @GetMapping("/getShipById/{id}")
+    public List<Shipment> getShipById(@PathVariable Long id)
+    {
+        return shipmentService.getByShipId(id);
+    }
 }

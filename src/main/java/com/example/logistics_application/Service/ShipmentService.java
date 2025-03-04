@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -108,7 +109,7 @@ public class ShipmentService {
         selectedVehicle.setVechicleStatus(VechicleStatus.IN_USE);
         selectedDriver.setStatus(DriverStatus.UNAVAILABLE);
         String otp = emailService.generateOtp();
-        emailService.sendOtpEmail(order.getRecieverEmail(), otp);
+        emailService.sendOtpEmail(order.getRecieverEmail(), otp,order);
         Shipment shipment = new Shipment();
         shipment.setOrders(order);
         shipment.setVechicles(selectedVehicle);
@@ -133,5 +134,11 @@ public class ShipmentService {
     }
 
 
+    public List<Shipment> getInships() {
+        return shipmentRepo.findByStatus(ShipmentStatus.IN_TRANSIT);
+    }
 
+    public List<Shipment> getByShipId(Long id) {
+        return shipmentRepo.findAllByDriverId(id);
+    }
 }

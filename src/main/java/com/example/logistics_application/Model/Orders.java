@@ -35,13 +35,12 @@ public class Orders
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "uid",nullable = false)
-   // @JsonBackReference(value = "user-orders")
+    @JsonBackReference(value = "user-orders")
     private Users customer;
 
     //one order -> one shipment
     @OneToOne(mappedBy = "orders",cascade = CascadeType.ALL)
-    //@Column(name = "order_ship")
-    @JsonIgnore
+    @JsonBackReference("order-shipment")
     private Shipment shipment;
 
 //    @Override
