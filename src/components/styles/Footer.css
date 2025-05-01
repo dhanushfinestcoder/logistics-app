@@ -1,0 +1,8 @@
+.footer {
+  background-color: white; /* Dark background to match Hero Section */
+  color: black; /* White text for contrast */
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
