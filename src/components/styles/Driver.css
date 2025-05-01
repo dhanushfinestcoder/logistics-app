@@ -1,0 +1,71 @@
+
+.container-fluid {
+    padding: 20px;
+  }
+  
+
+  .card {
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+    padding: 10px;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+
+  .card-text {
+    font-size: 14px;
+    padding: 10px;
+    color: #555;
+    text-align: left;
+  }
+  
+
+  .driver-status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+  
+  .driver-status.available {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .driver-status.unavailable {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+ 
+  .vehicle-details {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
+
+  .view-details-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  

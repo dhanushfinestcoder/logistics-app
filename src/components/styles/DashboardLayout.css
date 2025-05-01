@@ -1,0 +1,136 @@
+:root {
+  --navBg: #044f66;
+  --sidebarBg: #0c3b5c;
+  --hoverColor: #1a83ff;
+  --textColor: white;
+  --fontFamily: 'Arial', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--navBg);
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-bars {
+  font-size: 1.8rem;
+  background: none;
+  color: var(--textColor);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu-bars:hover {
+  color: var(--hoverColor);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Sidebar */
+.nav-menu {
+  background-color: var(--sidebarBg);
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+  padding-top: 70px; /* Matches navbar height */
+}
+
+.nav-menu.active {
+  left: 0;
+}
+
+.nav-menu-items {
+  width: 100%;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-text {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  transition: background 0.3s ease-in-out;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: var(--textColor);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--fontFamily);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: var(--hoverColor);
+  color: white;
+}
+
+.navbar-toggle {
+  background-color: var(--navBg);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+span {
+  margin-left: 12px;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  margin-left: 0;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.nav-menu.active + .dashboard-content {
+  margin-left: 250px;
+}
+
+.avatar-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.avatar-icon:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    width: 200px;
+  }
+
+  .nav-menu.active + .dashboard-content {
+    margin-left: 200px;
+  }
+
+  .nav-text a {
+    font-size: 14px;
+  }
+}

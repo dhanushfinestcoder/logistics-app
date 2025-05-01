@@ -1,0 +1,132 @@
+
+.container-fluid {
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-right: 10px;
+}
+
+.card {
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.border-success {
+    border: 3px solid #28a745 !important;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-text {
+    font-size: 14px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Flex Styling for Better Alignment */
+.order-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.order-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:disabled {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .col-lg-3, .col-md-4, .col-sm-6, .col-12 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .card {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+.delivered-btn {
+    background-color: #0e8a05!important; 
+    border-color: #0ccc0c !important;
+    color: white !important;
+  }
+  .delivered-btn:hover {
+    background-color: #004d00 !important; 
+  }
+  
+.order-details {
+  margin-top: 10px;
+}
+
+.order-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  margin-bottom: 8px; /* Space between each row */
+  font-size: 14px;
+  font-weight: 500;
+  color: #333; /* Darker text for better readability */
+}
